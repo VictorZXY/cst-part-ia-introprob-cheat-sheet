@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage[a4paper, left=25.4mm, top=25.4mm, right=25.4mm, bottom=25.4mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{authoraftertitle}
+\usepackage{blindtext}
+\usepackage{booktabs}
+\usepackage{bussproofs}
+\usepackage{bm}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{multicol}
+\usepackage{newpxtext}
+%\usepackage{newpxmath}
+\usepackage{ragged2e}
+\usepackage{subcaption}
+\usepackage{textcomp}
+\usepackage{textgreek}
+\usepackage{vwcol}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\qedsymbol}{Q.E.D.}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+\author{Victor Zhao\\xz398@cantab.ac.uk}
+
+\begin{document}
+\centering
+\section*{Introduction to Probability\\CST Part IA Paper 1}
+\MyAuthor
+
+\justifying
+
+\subsection{Prerequisites and Introduction}
+
+\begin{enumerate}
+	\item Combinatorics:
+		
+		\renewcommand\arraystretch{1.5}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\multicolumn{4}{|c|}{Counting tasks on $n$ objects} \\
+			\hline
+			\multicolumn{2}{|c|}{Permutations (sort objects)} & \multicolumn{2}{|c|}{Combinations (choose $r$ objects)} \\
+			\hline
+			Distinct & Indistinct & Distinct 1 group & Distinct $k$ groups \\
+			\hline
+			$n!$ & $\dfrac{n!}{n_1!n_2!\cdots n_r!}$ & $\displaystyle{n\choose r}=\dfrac{n!}{r!(n-r)!}$ & $\displaystyle{n\choose n_1,n_2,\cdots,n_k}=\dfrac{n!}{n_1!n_2!\cdots n_k!}$ \\
+			\hline
+		\end{tabular}
+	
+		Pascal's identity: $\displaystyle{n\choose r} = {n-1\choose r-1}+{n-1\choose r}\qquad(1\leq r\leq n)$
+		
+		Binomial theorem: $(x+y)^n = \displaystyle\sum_{r=0}^{n}{n\choose r}x^r y^{n-r}$
+		
+	\item Frequentist definition of probability: $\mathbb{P}[E]=\displaystyle\lim_{n\to\infty}\frac{\text{\# Trials where $E$ occurs}}{\text{\# Total trials ($n$)}}$
+	\item Probability axioms:
+	
+		Axiom 1: For any event $E$, $0\leq\mathbb{P}[E]\leq1$ \\
+		Axiom 2: Probability of the sample space $S$ is $\mathbb{P}[S]=1$ \\
+		Axiom 3: If $E$ and $F$ are mutually exclusive (i.e., $E\cap F=\varnothing$), then $\mathbb{P}[E\cup F]=\mathbb{P}[E]+\mathbb{P}[F]$ \\
+		\phantom{Axiom 3: }In general, for all mutually exclusive events $E_1$, $E_2$, $\cdots$,
+		\vspace*{-0.5\baselineskip}$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^\infty E_i\right]=\sum_{i=1}^\infty \mathbb{P}[E_i]$$
+		
+	\item General inclusion-exclusion principle: $\displaystyle\mathbb{P}\left[\bigcup_{i=1}^n E_i\right]=\sum_{r=1}^{n}(-1)^{r+1}\left(\sum_{i_1<\cdots<i_r}^{n}\mathbb{P}[E_{i_1}\cap\cdots\cap E_{i_r}]\right)$ 
+		
+		Case $n=2$: $\mathbb{P}[E\cup F]=\mathbb{P}[E]+\mathbb{P}[F]-\mathbb{P}[E\cap F]$ \\
+	
+	\item Union bound (Boole's inequality): For any events $E_1$, $E_2$, $\cdots$, $E_n$,
+		\vspace*{-0.5\baselineskip}$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^n E_i\right]\leq\sum_{i=1}^{n}\mathbb{P}[E_i]$$
+	
+\end{enumerate}
+
+\subsection{Random Variables}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\subsection{Moments and Limit Theorems}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\subsection{Applications and Statistics}
+
+\begin{enumerate}
+	\item 
+\end{enumerate}
+
+\end{document}
