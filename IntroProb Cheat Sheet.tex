@@ -15,7 +15,9 @@
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{latexsym}
+\usepackage{makecell}
 \usepackage{multicol}
+\usepackage{multirow}
 \usepackage{newpxtext}
 %\usepackage{newpxmath}
 \usepackage{ragged2e}
@@ -41,7 +43,7 @@
 
 \begin{enumerate}
 	\item Combinatorics:
-		
+	
 		\renewcommand\arraystretch{1.5}
 		\begin{tabular}{|c|c|c|c|}
 			\hline
@@ -59,22 +61,56 @@
 		
 		Binomial theorem: $(x+y)^n = \displaystyle\sum_{r=0}^{n}{n\choose r}x^r y^{n-r}$
 		
-	\item Frequentist definition of probability: $\mathbb{P}[E]=\displaystyle\lim_{n\to\infty}\frac{\text{\# Trials where $E$ occurs}}{\text{\# Total trials ($n$)}}$
+%	\item Frequentist definition of probability: $\mathbb{P}[E]=\displaystyle\lim_{n\to\infty}\frac{\text{\# Trials where $E$ occurs}}{\text{\# Total trials ($n$)}}$
+
 	\item Probability axioms:
 	
 		Axiom 1: For any event $E$, $0\leq\mathbb{P}[E]\leq1$ \\
 		Axiom 2: Probability of the sample space $S$ is $\mathbb{P}[S]=1$ \\
 		Axiom 3: If $E$ and $F$ are mutually exclusive (i.e., $E\cap F=\varnothing$), then $\mathbb{P}[E\cup F]=\mathbb{P}[E]+\mathbb{P}[F]$ \\
 		\phantom{Axiom 3: }In general, for all mutually exclusive events $E_1$, $E_2$, $\cdots$,
-		\vspace*{-0.5\baselineskip}$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^\infty E_i\right]=\sum_{i=1}^\infty \mathbb{P}[E_i]$$
+		$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^\infty E_i\right]=\sum_{i=1}^\infty \mathbb{P}[E_i]$$
 		
 	\item General inclusion-exclusion principle: $\displaystyle\mathbb{P}\left[\bigcup_{i=1}^n E_i\right]=\sum_{r=1}^{n}(-1)^{r+1}\left(\sum_{i_1<\cdots<i_r}^{n}\mathbb{P}[E_{i_1}\cap\cdots\cap E_{i_r}]\right)$ 
 		
-		Case $n=2$: $\mathbb{P}[E\cup F]=\mathbb{P}[E]+\mathbb{P}[F]-\mathbb{P}[E\cap F]$ \\
+		Case $n=2$: $\mathbb{P}[E\cup F]=\mathbb{P}[E]+\mathbb{P}[F]-\mathbb{P}[E\cap F]$
 	
 	\item Union bound (Boole's inequality): For any events $E_1$, $E_2$, $\cdots$, $E_n$,
-		\vspace*{-0.5\baselineskip}$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^n E_i\right]\leq\sum_{i=1}^{n}\mathbb{P}[E_i]$$
+		$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^n E_i\right]\leq\sum_{i=1}^{n}\mathbb{P}[E_i]$$
+		
+	\item Conditional probability (original and conditioning on event \textcolor{blue}{$G$}):
 	
+		Chain rule:
+		\begin{align*}
+			&\mathbb{P}[EF]=\mathbb{P}[E|F]\mathbb{P}[F] &&\hspace*{-6cm}\mathbb{P}[EF|\textcolor{blue}{G}]=\mathbb{P}[E|F\textcolor{blue}{G}]\mathbb{P}[F|\textcolor{blue}{G}] \\
+			\intertext{Multiplication rule:}
+			&\mathbb{P}[E_1E_2\cdots E_n]=\mathbb{P}[E_1]\mathbb{P}[E_2|E_1]\cdots\mathbb[E_n|E_1\cdots E_{n-1}] && \\
+			&\mathbb{P}[E_1E_2\cdots E_n|\textcolor{blue}{G}]=\mathbb{P}[E_1|\textcolor{blue}{G}]\mathbb{P}[E_2|E_1\textcolor{blue}{G}]\cdots\mathbb[E_n|E_1\cdots E_{n-1}\textcolor{blue}{G}] && \\
+			\intertext{Independence of $E$ and $F$:}
+			&\mathbb{P}[EF]=\mathbb{P}[E]\mathbb{P}[F] &&\hspace*{-6cm}\mathbb{P}[EF|\textcolor{blue}{G}]=\mathbb{P}[E|\textcolor{blue}{G}]\mathbb{P}[F|\textcolor{blue}{G}] \\
+			&\mathbb{P}[E|F]=\mathbb{P}[E] &&\hspace*{-6cm}\mathbb{P}[E|F\textcolor{blue}{G}]=\mathbb{P}[E|\textcolor{blue}{G}] \\
+			\intertext{Law of total probability:}
+			&\mathbb{P}[E]=\mathbb{P}[EF]+\mathbb{P}[EF^\complement]=\mathbb{P}[E|F]\mathbb{P}[F]+\mathbb{P}[E|F^\complement]\mathbb{P}[F^\complement] && \\
+			&\mathbb{P}[E|\textcolor{blue}{G}]=\mathbb{P}[EF|\textcolor{blue}{G}]+\mathbb{P}[EF^\complement|\textcolor{blue}{G}]=\mathbb{P}[E|F\textcolor{blue}{G}]\mathbb{P}[F|\textcolor{blue}{G}]+\mathbb{P}[E|F^\complement\textcolor{blue}{G}]\mathbb{P}[F^\complement|\textcolor{blue}{G}] && \\
+			\intertext{In general, for disjoint events $F_1$, $F_2$, $\cdots$, $F_n$ such that $F_1\cup\cdots\cup F_n=S$,}
+			&\mathbb{P}[E]=\sum_{i=1}^{n}\mathbb{P}[E|F_i]\mathbb{P}[F_i] &&\hspace*{-6cm}\mathbb{P}[E|\textcolor{blue}{G}]=\sum_{i=1}^{n}\mathbb{P}[E|F_i\textcolor{blue}{G}]\mathbb{P}[F_i|\textcolor{blue}{G}] \\
+			\intertext{Bayes' theorem:}
+			&\mathbb{P}[F|E]=\frac{\mathbb{P}[E|F]\mathbb{P}[F]}{\mathbb{P}[E]} &&\hspace*{-6cm}\mathbb{P}[F|E\textcolor{blue}{G}]=\frac{\mathbb{P}[E|F\textcolor{blue}{G}]\mathbb{P}[F|\textcolor{blue}{G}]}{\mathbb{P}[E|\textcolor{blue}{G}]}
+		\end{align*}
+	
+	\item Confusion matrix:
+	
+		\begin{tabular}{|c|l|l|l|}
+			\cline{3-4}
+			\multicolumn{2}{c|}{} & \multicolumn{2}{c|}{Actual condition} \\
+			\cline{2-4}
+			\multicolumn{1}{c|}{} & Total population & Positive $F$ & Negative $F^\complement$ \\
+			\hline
+			\multirow{2}{*}{\makecell[l]{{}\\Predicted\\condition}} & Positive $E$ & \makecell[l]{True positive\\$\mathbb{P}[E|F]$} & \makecell[l]{False positive\\$\mathbb{P}[E|F^\complement]$} \\
+			\cline{2-4}
+			& Negative $E^\complement$ & \makecell[l]{False negative\\$\mathbb{P}[E^\complement|F]$} & \makecell[l]{True negative\\$\mathbb{P}[E^\complement|F^\complement]$} \\
+			\hline
+		\end{tabular}
 \end{enumerate}
 
 \subsection{Random Variables}
