@@ -4,6 +4,6 @@ A cheet sheet for the Part IA Introduction to Probability course of the Cambridg
 Topics included:
 
 1. Prerequisites and Introduction
-2. Random Variables (to be added)
+2. Random Variables
 3. Moments and Limit Theorems (to be added)
 4. Applications and Statistics (to be added)

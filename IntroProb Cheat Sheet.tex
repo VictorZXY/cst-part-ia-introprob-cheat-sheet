@@ -65,8 +65,10 @@
 
 	\item Probability axioms:
 	
-		Axiom 1: For any event $E$, $0\leq\mathbb{P}[E]\leq1$ \\
-		Axiom 2: Probability of the sample space $S$ is $\mathbb{P}[S]=1$ \\
+		Axiom 1: For any event $E$, $0\leq\mathbb{P}[E]\leq1$
+		
+		Axiom 2: Probability of the sample space $S$ is $\mathbb{P}[S]=1$
+		
 		Axiom 3: If $E$ and $F$ are mutually exclusive (i.e., $E\cap F=\varnothing$), then $\mathbb{P}[E\cup F]=\mathbb{P}[E]+\mathbb{P}[F]$ \\
 		\phantom{Axiom 3: }In general, for all mutually exclusive events $E_1$, $E_2$, $\cdots$,
 		$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^\infty E_i\right]=\sum_{i=1}^\infty \mathbb{P}[E_i]$$
@@ -79,9 +81,9 @@
 		$$\displaystyle\mathbb{P}\left[\bigcup_{i=1}^n E_i\right]\leq\sum_{i=1}^{n}\mathbb{P}[E_i]$$
 		
 	\item Conditional probability (original and conditioning on event \textcolor{blue}{$G$}):
-	
-		Chain rule:
+		\vspace*{-\baselineskip}
 		\begin{align*}
+			\intertext{Chain rule:}
 			&\mathbb{P}[EF]=\mathbb{P}[E|F]\mathbb{P}[F] &&\hspace*{-6cm}\mathbb{P}[EF|\textcolor{blue}{G}]=\mathbb{P}[E|F\textcolor{blue}{G}]\mathbb{P}[F|\textcolor{blue}{G}] \\
 			\intertext{Multiplication rule:}
 			&\mathbb{P}[E_1E_2\cdots E_n]=\mathbb{P}[E_1]\mathbb{P}[E_2|E_1]\cdots\mathbb[E_n|E_1\cdots E_{n-1}] && \\
@@ -116,7 +118,139 @@
 \subsection{Random Variables}
 
 \begin{enumerate}
-	\item 
+	\item Probability distribution functions:
+		\vspace*{-0.5\baselineskip}
+		\begin{multicols}{2}
+			Discrete random variable $X$:
+			\begin{itemize}
+				\item Probability mass function (PMF): $p(x)$
+				\item Compute Probability:
+					\begin{align*}
+						&\mathbb{P}[X=a]=p(x) \\
+						&\mathbb{P}[a\leq X\leq b]=\sum_{x=a}^{b}p(x)
+					\end{align*}
+				\item Cumulative distribution function (CDF):
+					$$F_X(a)=\mathbb{P}[X\leq a]=\sum_{x\leq a}p(x)$$
+			\end{itemize}
+			
+			\columnbreak
+			Continuous random variable $X$:
+			\begin{itemize}
+				\item Probability density function (PDF): $f(x)$
+				\item Compute Probability:
+					\begin{align*}
+						&\mathbb{P}[X=a]=0 \\
+						&\mathbb{P}[a\leq X\leq b]=\int_{a}^{b}f(x)dx
+					\end{align*}
+				\item Cumulative distribution function (CDF):
+					$$F_X(a)=\mathbb{P}[X\leq a]=\int_{-\infty}^{a}f(x)dx$$
+			\end{itemize}
+		\end{multicols}
+		
+	\vspace*{-\baselineskip}
+	\item Expectation:
+		\vspace*{-0.5\baselineskip}
+		\begin{multicols}{2}
+			Discrete random variable $X$:
+			\begin{align*}
+				&\mathbb{E}[X]=\sum_x xp(x) \\
+				&\mathbb{E}[g(X)]=\sum_x g(x)p(x)
+			\end{align*}
+			
+			\columnbreak
+			Continuous random variable $X$:
+			\begin{align*}
+				&\mathbb{E}[X]=\int_{-\infty}^{\infty} xf(x)dx \\
+				&\mathbb{E}[g(X)]=\int_{-\infty}^{\infty} g(x)f(x)dx
+			\end{align*}
+		\end{multicols}
+		\vspace*{-0.5\baselineskip}
+		Linearity of expectation: $\mathbb{E}[aX+b]=a\mathbb{E}[X]+b$
+		
+		Additivity of expectation: $\mathbb{E}[X+Y]=\mathbb{E}[X]+\mathbb{E}[Y]$
+	
+	\item Variance: $\mathbb{V}[X]=\mathbb{E}\left[(X-\mathbb{E}[X])^2\right]=\mathbb{E}\left[X^2\right]-\mathbb{E}[X]^2$
+	
+		Scaling of variance: $\mathbb{V}[aX+b]=a^2\mathbb{V}[X]$
+		
+		Standard deviation: $\mathbb{SD}[X]=\sqrt{\mathbb{V}[X]}$
+		
+		Scaling of standard deviation: $\mathbb{SD}[aX+b]=|a|\mathbb{SD}[X]$
+		
+	\item Discrete distributions:
+		\vspace*{-\baselineskip}
+		\begin{align*}
+			\intertext{Bernoulli $\mathrm{Ber}(p)$: 1 experiment with success probability $p$}
+			&\mathbb{P}[X=1]=p &&\mathbb{E}[X]=p &&\mathbb{V}[X]=p(1-p) \\
+			\intertext{Binomial $\mathrm{Bin}(n,p)$: $n$ independent trials with success probability $p$}
+			&\mathbb{P}[X=k]={n\choose k}p^k(1-p)^{n-k} &&\mathbb{E}[X]=np &&\mathbb{V}[X]=np(1-p) \\
+			\intertext{Poisson $\mathrm{Pois}(\lambda)$: \# successes over experiment duration, with success rate $\lambda=np$}
+			&\mathbb{P}[X=k]=\frac{\lambda^k}{k!}e^{-\lambda} &&\mathbb{E}[X]=\lambda &&\mathbb{V}[X]=\lambda \\
+			\intertext{Geometric $\mathrm{Geo}(p)$: \# independent trials until first success, with success probability $p$}
+			&\mathbb{P}[X=n]=(1-p)^{n-1}p &&\mathbb{E}[X]=\frac{1}{p} &&\mathbb{V}[X]=\frac{1-p}{p^2} \\
+			\intertext{Negative binomial $\mathrm{NegBin}(r,p)$: \# independent trials until $r$ success, with success probability $p$}
+			&\mathbb{P}[X=n]={n-1\choose r-1}(1-p)^{n-r}p^r &&\mathbb{E}[X]=\frac{r}{p} &&\mathbb{V}[X]=\frac{r(1-p)}{p^2} \\
+			\intertext{Hypergeometric $\mathrm{Hyp}(N,n,m)$: \# objects with a feature in a sample of size $n$ (without replacement) from a population of size $N$ that contains $m$ items with the feature}
+			&\mathbb{P}[X=n]=\frac{{m\choose i}{N-m\choose n-i}}{{N\choose n}} &&\mathbb{E}[X]=n\frac{m}{N} &&\mathbb{V}[X]=n\frac{m}{N}\left(1-\frac{m}{N}\right)\left(1-\frac{n-1}{N-1}\right)
+		\end{align*}
+		
+	\item Continuous distributions:
+		\vspace*{-\baselineskip}
+		\begin{align*}
+			\intertext{Uniform $\mathrm{Uni}(\alpha,\beta)$: equal probability within range $[\alpha,\beta]$\vspace*{-0.5\baselineskip}}
+			&\text{PDF: }f(x)=\begin{cases}
+				\frac{1}{\beta-\alpha} &\text{when $\alpha\leq x\leq\beta$} \\
+				0 &\text{otherwise}
+			\end{cases} &&\hspace*{-3.9cm}\text{CDF: }F(x)=\begin{cases}
+				0 &\text{when $x<\alpha$} \\
+				\frac{x-\alpha}{\beta-\alpha} &\text{when $\alpha\leq x\leq\beta$} \\
+				1 &\text{when $x>\beta$}
+			\end{cases} \\
+			&\mathbb{E}[X]=\frac{\alpha+\beta}{2} &&\hspace*{-3.9cm}\mathbb{V}[X]=\frac{(\beta-\alpha)^2}{12} \\
+			\intertext{Exponential $\mathrm{Exp}(\lambda)$: time until first success occurs, with success rate $\lambda$}
+			&\text{PDF: }f(x)=\begin{cases}
+				\lambda e^{-\lambda x} &\text{when $x\geq0$} \\
+				0 &\text{otherwise}
+			\end{cases} &&\hspace*{-3.9cm}\text{CDF: }F(x)=1-e^{-\lambda x} \\
+			&\mathbb{E}[X]=\frac{1}{\lambda} &&\hspace*{-3.9cm}\mathbb{V}[X]=\frac{1}{\lambda^2} \\
+			\intertext{Normal (Gaussian) $\mathcal{N}(\mu,\sigma^2)$: mean $\mu$, variance $\sigma^2$}
+			&\text{PDF: }f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu^2)}{2\sigma^2}}&&\hspace*{-3.9cm}\text{CDF: }F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right) \\
+			&\mathbb{E}[X]=\mu &&\hspace*{-3.9cm}\mathbb{V}[X]=\sigma^2 \\[0.25\baselineskip]
+			&X\sim\mathcal{N}(\mu,\sigma^2)\implies aX+b\sim\mathcal{N}(a\mu+b,a^2\sigma^2) \\[0.25\baselineskip]
+			&X\sim\mathcal{N}(\mu_X,\sigma_X^2),Y\sim\mathcal{N}(\mu_Y,\sigma_Y^2)\implies X+Y\sim\mathcal{N}(\mu_X+\mu_Y,\sigma_X^2+\sigma_Y^2)
+		\end{align*}
+		
+		
+	\item Joint probability mass function (for discrete RVs): $p_{X,Y}(a,b)=\mathbb{P}[X=a,Y=b]$
+	
+		Joint distribution function (for discrete or continuous RVs): $F_{X,Y}(a,b)=\mathbb{P}[X\leq a,Y\leq b]$
+		
+		Joint probability density $f$ and joint continuous distribution $F$ (for continuous RVs):
+		\begin{align*}
+			&F(a,b)=\int_{-\infty}^{a}\int_{-\infty}^{b}f(x,y)dxdy &&\hspace*{-4.4cm}f(x,y)=\frac{\partial^2}{\partial x\partial y}F(x,y) \\
+			&\mathbb{P}[a_1\leq X\leq b_1, a_2\leq Y\leq b_2]=\int_{a_1}^{b_1}\int_{a_2}^{b_2}f(x,y)dxdy
+		\end{align*}
+		
+		Marginal distribution: $F_X(a)=\mathbb{P}[X\leq a]=\displaystyle\lim_{b\to\infty}F_{X,Y}(a,b)$
+	
+	\item Covariance: $\mathrm{Cov}[X,Y]=\mathbb{E}\left[(X-\mathbb{E}[X])(Y-\mathbb{E}[Y])\right]=\mathbb{E}[XY]-\mathbb{E}[X]\mathbb{E}[Y]$
+		
+		Covariance of linear combinations:
+		\begin{align*}
+			&\mathrm{Cov}[X,a]=0 &&\mathrm{Cov}[X,X]=\mathbb{V}[X] \\
+			&\mathrm{Cov}[aX,bY]=ab\mathrm{Cov}[X,Y] &&\mathrm{Cov}[X+a,Y+b]=\mathrm{Cov}[X,Y]
+		\end{align*}
+		
+		Variance of Sum Formula: $\mathbb{V}[X+Y]=\mathbb{V}[X]+\mathbb{V}[Y]+2\mathrm{Cov}[X,Y]$
+		
+		In general, for any random variables $X_1$, $X_2$, $\cdots$, $X_n$:
+		$$\mathbb{V}\left[\sum_{i=1}^{n}X_i\right]=\sum_{i=1}^{n}\mathbb{V}[X_i]+2\sum_{i=1}^{n-1}\sum_{j=i+1}
+		^{n}\mathrm{Cov}[X_i,X_j]$$
+		
+		Correlation coefficient: $\rho(X,Y)=\dfrac{\mathrm{Cov}[X,Y]}{\sqrt{\mathbb{V}[X]\mathbb{V}[Y]}}\in[-1,1]$\ \ ($\rho(X,Y)=0$ if $\mathbb{V}[X]=0$ or $\mathbb{V}[Y]=0$)
+		
+		Scaling-invariance of correlation coefficient: $\rho(aX,bY)=\rho(X,Y)$
+	
 \end{enumerate}
 
 \subsection{Moments and Limit Theorems}
