@@ -20,6 +20,7 @@
 \usepackage{multirow}
 \usepackage{newpxtext}
 %\usepackage{newpxmath}
+\usepackage{nicefrac}
 \usepackage{ragged2e}
 \usepackage{subcaption}
 \usepackage{textcomp}
@@ -124,7 +125,7 @@
 			Discrete random variable $X$:
 			\begin{itemize}
 				\item Probability mass function (PMF): $p(x)$
-				\item Compute Probability:
+				\item Compute probability:
 					\begin{align*}
 						&\mathbb{P}[X=a]=p(x) \\
 						&\mathbb{P}[a\leq X\leq b]=\sum_{x=a}^{b}p(x)
@@ -137,7 +138,7 @@
 			Continuous random variable $X$:
 			\begin{itemize}
 				\item Probability density function (PDF): $f(x)$
-				\item Compute Probability:
+				\item Compute probability:
 					\begin{align*}
 						&\mathbb{P}[X=a]=0 \\
 						&\mathbb{P}[a\leq X\leq b]=\int_{a}^{b}f(x)dx
@@ -219,7 +220,17 @@
 			&X\sim\mathcal{N}(\mu,\sigma^2)\implies aX+b\sim\mathcal{N}(a\mu+b,a^2\sigma^2) \\[0.25\baselineskip]
 			&X\sim\mathcal{N}(\mu_X,\sigma_X^2),Y\sim\mathcal{N}(\mu_Y,\sigma_Y^2)\implies X+Y\sim\mathcal{N}(\mu_X+\mu_Y,\sigma_X^2+\sigma_Y^2)
 		\end{align*}
-		
+	
+	\item Continuity correction:
+		\vspace*{-0.5\baselineskip}
+		\begin{align*}
+			&\text{Discrete} &&        &&\text{Continuous}\hspace*{8cm} \\
+			&\mathbb{P}[X=a] &&\approx &&\mathbb{P}[a-0.5\leq X\leq a+0.5] \\
+			&\mathbb{P}[X>a] &&\approx &&\mathbb{P}[X\geq a+0.5] \\
+			&\mathbb{P}[X\geq a] &&\approx &&\mathbb{P}[X\geq a-0.5] \\
+			&\mathbb{P}[X<a] &&\approx &&\mathbb{P}[X\leq a-0.5] \\
+			&\mathbb{P}[X\leq a] &&\approx &&\mathbb{P}[X\leq a+0.5]
+		\end{align*}	
 		
 	\item Joint probability mass function (for discrete RVs): $p_{X,Y}(a,b)=\mathbb{P}[X=a,Y=b]$
 	
@@ -241,7 +252,7 @@
 			&\mathrm{Cov}[aX,bY]=ab\mathrm{Cov}[X,Y] &&\mathrm{Cov}[X+a,Y+b]=\mathrm{Cov}[X,Y]
 		\end{align*}
 		
-		Variance of Sum Formula: $\mathbb{V}[X+Y]=\mathbb{V}[X]+\mathbb{V}[Y]+2\mathrm{Cov}[X,Y]$
+		Variance of sum: $\mathbb{V}[X+Y]=\mathbb{V}[X]+\mathbb{V}[Y]+2\mathrm{Cov}[X,Y]$
 		
 		In general, for any random variables $X_1$, $X_2$, $\cdots$, $X_n$:
 		$$\mathbb{V}\left[\sum_{i=1}^{n}X_i\right]=\sum_{i=1}^{n}\mathbb{V}[X_i]+2\sum_{i=1}^{n-1}\sum_{j=i+1}
@@ -256,7 +267,26 @@
 \subsection{Moments and Limit Theorems}
 
 \begin{enumerate}
-	\item 
+	\item Markov's inequality: for any non-negative random variable $X$ with finite $\mathbb{E}[X]$, for any $a>0$,
+		$$\mathbb{P}[X\geq a]\leq\frac{\mathbb{E}[X]}{a}$$
+		Let $a=\delta\cdot\mathbb{E}[X]$ (where $\delta>0$), then the inequality can be rewritten as
+		$$\mathbb{P}[X\geq\delta\cdot\mathbb{E}[X]]\leq\frac{1}{\delta}$$
+		
+	\item Chebyshev's inequality: for any random variable $X$ with finite $\mathbb{E}[X]$ and $\mathbb{V}[X]$, for any $a>0$,
+		$$\mathbb{P}[|X-\mathbb{E}[X]|\geq a]\leq\frac{\mathbb{V}[X]}{a^2}$$
+		Let $a=\sqrt{\delta\cdot\mathbb{V}[X]}$ (where $\delta>0$), then the inequality can be rewritten as
+		$$\mathbb{P}\left[|X-\mathbb{E}[X]|\geq\sqrt{\delta\cdot\mathbb{V}[X]}\right]\leq\frac{1}{\delta}$$
+	
+	\item Weak law of large numbers: let $\overline{X}_n=\frac{1}{n}\sum_{i=1}^{n}X_i$, where $X_i$'s are independent and identically distributed (i.i.d.) with finite expectation $\mu$ and finite variance $\sigma^2$. Then, for any $\epsilon>0$,
+		$$\lim_{n\to\infty}\mathbb{P}\left[|\overline{X}_n-\mu|>\epsilon\right]=0$$
+		Strong law of large numbers: 
+		$$\mathbb{P}\left[\lim_{n\to\infty}\overline{X}_n=\mu\right]=1$$
+		
+	\item Central limit theorem: let $X_1$, $X_2$, $\cdots$, $X_n$ be any sequence of i.i.d.~random variables with finite expectation $\mu$ and finite variance $\sigma^2$. Let
+		$$Z_n=\sqrt{n}\cdot\frac{\overline{X}_n-\mu}{\sigma}=\frac{1}{\sigma\sqrt{n}}\left(\sum_{i=1}^{n}X_i-n\mu\right)$$
+		Then for any number $a\in\mathbb{R}$, it holds that 
+		$$\lim_{n\to\infty}F_{Z_n}(a)=\Phi(a)=\frac{1}{2\pi}\int_{-\infty}^{a}e^{-\frac{x^2}{2}}dx$$
+		where $\Phi$ is the CDF of the standard normal distribution $\mathcal{N}(0,1)$.
 \end{enumerate}
 
 \subsection{Applications and Statistics}

@@ -5,5 +5,5 @@ Topics included:
 
 1. Prerequisites and Introduction
 2. Random Variables
-3. Moments and Limit Theorems (to be added)
+3. Moments and Limit Theorems
 4. Applications and Statistics (to be added)
